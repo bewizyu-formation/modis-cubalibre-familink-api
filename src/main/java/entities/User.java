@@ -12,6 +12,7 @@ public class User {
 
     /**
      * Constructor
+     *
      * @param id
      * @param mail
      * @param password
@@ -31,7 +32,7 @@ public class User {
     }
 
     /**
-     * GETTER
+     * GETTERS & SETTERS
      * @return
      */
     public int getId() {
@@ -46,27 +47,11 @@ public class User {
         return password;
     }
 
-    public Contact getContact() {
-        return contact;
-    }
-
-    /**
-     * SETTER
-     *
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public Contact getContact() {
+        return contact;
     }
 }
