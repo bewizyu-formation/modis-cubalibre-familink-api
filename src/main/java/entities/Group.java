@@ -55,7 +55,5 @@ public class Group {
         return contacts;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
+
 }
