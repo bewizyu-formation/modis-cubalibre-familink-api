@@ -6,7 +6,7 @@ private String lastName;
 private String firstName;
 private String phone;
 private Profil profil;
-private String adress;
+private String address;
 private String zipcode;
 private String city;
 private String gravatar;
@@ -52,12 +52,12 @@ private String gravatar;
         this.profil = profil;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = address;
     }
 
     public String getZipcode() {
