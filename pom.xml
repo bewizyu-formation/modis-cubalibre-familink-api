@@ -8,6 +8,7 @@
     <artifactId>familink</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,7 +26,7 @@
         </resources>
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
-        <finalName>atelier</finalName>
+        <finalName>familink-api</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
