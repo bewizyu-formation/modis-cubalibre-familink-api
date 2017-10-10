@@ -2,17 +2,18 @@ package entities;
 
 public class Contact {
     private Integer id;
-private String lastName;
-private String firstName;
-private String phone;
-private Profil profil;
-private String address;
-private String zipcode;
-private String city;
-private String gravatar;
-public Contact(){
+    private String lastName;
+    private String firstName;
+    private String phone;
+    private Profil profil;
+    private String address;
+    private String zipcode;
+    private String city;
+    private String gravatar;
 
-}
+    public Contact() {
+
+    }
 
     public Contact(String lastName, String firstName, String phone, Profil profil, String address, String zipcode, String city, String gravatar) {
         this.lastName = lastName;
@@ -29,9 +30,6 @@ public Contact(){
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getLastName() {
         return lastName;
