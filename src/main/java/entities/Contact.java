@@ -56,7 +56,7 @@ private String gravatar;
         return address;
     }
 
-    public void setAddress(String adress) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
