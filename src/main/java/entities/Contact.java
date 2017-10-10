@@ -10,7 +10,20 @@ private String address;
 private String zipcode;
 private String city;
 private String gravatar;
+public Contact(){
 
+}
+
+    public Contact(String lastName, String firstName, String phone, Profil profil, String address, String zipcode, String city, String gravatar) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.phone = phone;
+        this.profil = profil;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.gravatar = gravatar;
+    }
 
     public Integer getId() {
         return id;
