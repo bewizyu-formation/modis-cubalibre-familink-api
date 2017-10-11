@@ -20,5 +20,12 @@ public interface IContactService {
      */
     Contact create(Contact newContact);
 
+    /**
+     * Récupération d'un Contact par son id
+     *
+     * @param id
+     * @return
+     */
+    Contact getContactById(int id);
 
 }
