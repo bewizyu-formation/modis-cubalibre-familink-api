@@ -16,13 +16,19 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_group")
     private Integer id;
+
     @JoinColumn(name = "owner")
+    @OneToOne
     private User owner;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "create_date")
     private Date createDate;
-    @JoinColumn(name = "contacts")
+
+    @JoinTable
+    @ManyToMany
     private List<Contact> contacts;
 
     public Group() {
