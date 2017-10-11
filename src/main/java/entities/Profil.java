@@ -4,47 +4,48 @@ public class Profil {
 
     private int id;
 
-    private string type;
+    private String type;
 
-    private string color;
+    private String color;
 
+    /**
+     * Constructor vide
+     */
     public Profil() {
     }
 
     /**
      * Constructor
+     *
      * @param id
      * @param type
      * @param color
      */
-    public Profil(int id, string type, string color) {
+    public Profil(int id, String type, String color) {
         this.id = id;
         this.type = type;
         this.color = color;
     }
 
-    /**
-     * Constuctor vide
-     * @return
-     */
     public int getId() {
         return id;
     }
 
-    public string getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(string type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public string getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(string color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
 }
+
