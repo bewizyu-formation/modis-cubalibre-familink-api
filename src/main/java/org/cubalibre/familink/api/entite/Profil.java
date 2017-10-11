@@ -1,4 +1,4 @@
-package org.cubalibre.familink.api.entities;
+package org.cubalibre.familink.api.entite;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,24 +6,25 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 
 @Entity
-@Table(name="profil")
+@Table(name = "profil")
 public class Profil {
 
     private static final Logger LOG = LoggerFactory.getLogger(Profil.class.getName());
 
     @Id
-    @Column(name="id_profil")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id_profil")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="type")
+    @Column(name = "type")
     private String type;
 
-    @Column(name="color")
+    @Column(name = "color")
     private String color;
 
     /**
      * Constuctor vide
+     *
      * @return
      */
     public Profil() {
@@ -31,6 +32,7 @@ public class Profil {
 
     /**
      * Constructor
+     *
      * @param id
      * @param type
      * @param color
