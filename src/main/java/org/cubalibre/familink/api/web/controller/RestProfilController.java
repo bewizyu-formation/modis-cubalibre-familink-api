@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/profils")
+@RequestMapping("/profil")
 public class RestProfilController {
 
     private static final Logger LOG = LoggerFactory.getLogger(RestProfilController.class.getName());
@@ -20,17 +18,10 @@ public class RestProfilController {
     @Qualifier("profilService")
     private IProfilService profilService;
 
-
-    // ********** CREATE PROFILS ********** //
-    @RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public List<Profil> getProfils() {
-        return profilService.getProfils();
-    }
-
     // ********** CREATE PROFIL ********** //
     @RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     public Profil createProfil(@RequestBody Profil newProfil) {
+
         return profilService.create(newProfil);
     }
 
@@ -45,6 +36,7 @@ public class RestProfilController {
     @RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
     @ResponseBody
     public void updateProfil(@RequestBody Profil updateProfil) {
+
         profilService.update(updateProfil);
     }
 
