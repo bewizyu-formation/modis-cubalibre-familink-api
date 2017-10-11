@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `text`        VARCHAR(140) NOT NULL,
   `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP,
   `group_id`    INTEGER      NOT NULL,
+  `isRead`      BOOLEAN      NOT NULL             DEFAULT FALSE,
   CONSTRAINT fk_message_sender FOREIGN KEY (sender) REFERENCES contact (id_contact),
   CONSTRAINT fk_message_receiver FOREIGN KEY (receiver) REFERENCES contact (id_contact),
   CONSTRAINT fk_message_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group)
