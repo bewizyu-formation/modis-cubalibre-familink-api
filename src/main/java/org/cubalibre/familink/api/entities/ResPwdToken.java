@@ -1,19 +1,36 @@
 package org.cubalibre.familink.api.entities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "res_pwd_token")
 public class ResPwdToken {
-    private static final Logger LOG = LoggerFactory.getLogger(ResPwdToken.class.getName());
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_token")
     private Integer id;
+
+    @Column(name = "token")
     private String token;
+
+    @Column(name = "isUsed")
     private boolean isUsed;
 
+    /**
+     * Constuctor vide
+     * @return
+     */
     public ResPwdToken() {
-        LOG.info("ResPwdToken");
+
     }
 
+    /**
+     * Constructor
+     * @param id
+     * @param token
+     * @param isUsed
+     */
     public ResPwdToken(Integer id, String token, boolean isUsed) {
         this.id = id;
         this.token = token;
