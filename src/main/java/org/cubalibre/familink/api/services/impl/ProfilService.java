@@ -21,11 +21,13 @@ public class ProfilService implements IProfilService {
 
     @Override
     public Profil create(Profil newProfil) {
+
         return profilRepository.save(newProfil);
     }
 
     @Override
     public Profil getProfilById(int id) {
+
         return profilRepository.findOne(id);
     }
 
