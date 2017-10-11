@@ -3,12 +3,23 @@ package org.cubalibre.familink.api.entities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "favorite")
 public class Favorite {
 
     private static final Logger LOG = LoggerFactory.getLogger(Favorite.class.getName());
 
+    @Column(name = "id_group")
     private Integer id_groupe;
+
+    @Column(name = "id_uder")
     private Integer id_user;
+
+    @Column(name = "id_contact")
     private Integer id_contact;
 
     public Favorite() {
