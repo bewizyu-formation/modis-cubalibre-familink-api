@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.modis</groupId>
-    <artifactId>familink</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>org.cubalibre</groupId>
+    <artifactId>familink-api</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
 
@@ -24,9 +24,12 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
+        
         <finalName>familink-api</finalName>
+        
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -54,65 +57,62 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- API Servlets -->
+        <!-- Jackson pour la conversion des Beans en JSON (indique par @ResponseBody / @RequestBody dans REST controleurs) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        
+        <!-- Hibernate CORE pour des Objects qui ont Java8 LocalDate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>5.2.10.Final</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+       	<!-- API Servlets - lib permettant de creer des contrôleurs / servlets en Java EE, qui reagissent aux requetes HTTP -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
-
-        <!-- Spring Data -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>1.11.3.RELEASE</version>
-        </dependency>
-
+        
         <!-- SPRING Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
 
+		<!-- Spring MVC - framework presentation qui repose sur Requête / Réponse-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
+		<!-- Spring Data -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.11.3.RELEASE</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-        </dependency>
-
-        <!-- Jackson pour controleurs REST -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.5.0</version>
-        </dependency>
-
-        <!-- Connecteur jdbc MySQL -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.41</version>
-        </dependency>
-
-        <!-- API JPA -->
+		<!-- Spring ORM -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		
+        <!-- Spring ORM : API JPA -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
         </dependency>
 
-        <!-- Implémentation JPA -->
+       <!-- Spring ORM : Implémentation JPA -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -120,17 +120,35 @@
             <scope>runtime</scope>
         </dependency>
 
+		<!-- Spring JDBC - librairie Spring qui permet d’utiliser JDBC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		
+        <!-- Connecteur JDBC - MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.41</version>
+        </dependency>
+        
         <!-- Tests unitaires -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
         </dependency>
+        
+         <!-- AssertJ -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.8.0</version>
         </dependency>
+        
+        <!-- Spring : test -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -166,6 +184,7 @@
                 <jdbc.connections.max.active>5</jdbc.connections.max.active>
             </properties>
         </profile>
+
         <profile>
             <id>dev-mysql</id>
             <activation>
@@ -173,14 +192,15 @@
             </activation>
             <properties>
                 <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-                <jdbc.url>jdbc:mysql://localhost:3306/spring-test?useSSL=false</jdbc.url>
+                <jdbc.url>jdbc:mysql://localhost:3306/familink?useSSL=false</jdbc.url>
                 <jdbc.user>root</jdbc.user>
-                <jdbc.pass></jdbc.pass>
+                <jdbc.pass>1234</jdbc.pass>
                 <jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
                 <jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
                 <jdbc.connections.max.active>5</jdbc.connections.max.active>
             </properties>
         </profile>
+
         <profile>
             <id>prod</id>
             <properties>
