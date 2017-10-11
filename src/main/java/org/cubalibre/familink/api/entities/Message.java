@@ -8,6 +8,7 @@ import java.util.Date;
 public class Message {
 
     @Id
+    @Column(name="id_message")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -28,7 +29,7 @@ public class Message {
     @Column(name="isRead")
     private boolean isRead;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
 
