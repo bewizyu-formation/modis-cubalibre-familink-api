@@ -35,4 +35,12 @@ public interface IContactService {
      */
     void update(Contact contact);
 
+    /**
+     * Suppression d'un Contact by id
+     *
+     * @param id
+     */
+    void deleteContact(final int id);
+
+
 }

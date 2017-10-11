@@ -60,4 +60,11 @@ public class ContactService implements IContactService {
             contactRepository.save(toUpdate);
         }
     }
+
+    @Override
+    public void deleteContact(int id) {
+
+        contactRepository.delete(id);
+    }
+
 }

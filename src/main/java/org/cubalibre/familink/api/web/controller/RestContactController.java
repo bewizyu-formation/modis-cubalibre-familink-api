@@ -39,4 +39,13 @@ public class RestContactController {
 
         contactService.update(updateContact);
     }
+
+    // ******* DELETE CONTACT BY ID ******** //
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteContact(@PathVariable("id") String id) {
+        contactService.deleteContact(Integer.parseInt(id));
+
+    }
+
 }
