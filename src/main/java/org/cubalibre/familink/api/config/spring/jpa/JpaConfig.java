@@ -1,7 +1,5 @@
 package org.cubalibre.familink.api.config.spring.jpa;
 
-import java.util.Properties;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -69,9 +67,9 @@ public class JpaConfig {
 		factory.setPackagesToScan("org.cubalibre.familink.api.entites");
 		factory.setDataSource(dataSource);
 
-		Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create");
-		factory.setJpaProperties(jpaProperties);
+//		Properties jpaProperties = new Properties();
+//		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create");
+//		factory.setJpaProperties(jpaProperties);
 
 		factory.afterPropertiesSet();
 		return factory.getObject();
