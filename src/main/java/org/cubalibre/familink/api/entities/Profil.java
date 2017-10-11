@@ -3,15 +3,30 @@ package org.cubalibre.familink.api.entities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="profil")
 public class Profil {
 
     private static final Logger LOG = LoggerFactory.getLogger(Profil.class.getName());
 
+    @Id
+    @Column(name="id_profil")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="type")
     private String type;
+
+    @Column(name="color")
     private String color;
+
+    /**
+     * Constuctor vide
+     * @return
+     */
     public Profil() {
-        LOG.info("Profil");
     }
 
     /**
@@ -26,10 +41,6 @@ public class Profil {
         this.color = color;
     }
 
-    /**
-     * Constuctor vide
-     * @return
-     */
     public int getId() {
         return id;
     }
