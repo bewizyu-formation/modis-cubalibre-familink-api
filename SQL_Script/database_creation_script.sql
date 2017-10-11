@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `zipcode`    VARCHAR(5),
   `city`       VARCHAR(50),
   `gravatar`   VARCHAR(255),
-  CONSTRAINT fk_profil_profil_id
+  CONSTRAINT fk_contact_profil_id
   FOREIGN KEY (profil_id) REFERENCES
     profil (id_profil)
 );
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password`   VARCHAR(255) NOT NULL,
   `contact_id` INTEGER      NOT NULL,
   CONSTRAINT ui1_user_mail UNIQUE (mail),
-  CONSTRAINT fk_contact_contact_id
+  CONSTRAINT fk_user_contact_id
   FOREIGN KEY (contact_id) REFERENCES
     contact (id_contact)
 );
@@ -50,19 +50,19 @@ CREATE TABLE IF NOT EXISTS `message` (
   `text`        VARCHAR(140) NOT NULL,
   `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP,
   `group_id`    INTEGER      NOT NULL,
-  CONSTRAINT fk_contact_sender FOREIGN KEY (sender) REFERENCES contact (id_contact),
-  CONSTRAINT fk_contact_receiver FOREIGN KEY (receiver) REFERENCES contact (id_contact),
-  CONSTRAINT fk_group_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group)
+  CONSTRAINT fk_message_sender FOREIGN KEY (sender) REFERENCES contact (id_contact),
+  CONSTRAINT fk_message_receiver FOREIGN KEY (receiver) REFERENCES contact (id_contact),
+  CONSTRAINT fk_message_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group)
 );
 DROP TABLE IF EXISTS `favorite`;
 CREATE TABLE IF NOT EXISTS `favorite` (
   `user_id`    INTEGER NOT NULL,
   `contact_id` INTEGER NOT NULL,
   `group_id`   INTEGER NOT NULL,
-  CONSTRAINT fk_user_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
-  CONSTRAINT fk_contact_contact_id FOREIGN KEY (contact_id) REFERENCES user (user_id),
-  CONSTRAINT fk_group_group_id FOREIGN KEY (group_id) REFERENCES `group` (group_id),
-  CONSTRAINT ui1_favorite UNIQUE (user_id, contact_id, group_id)
+  CONSTRAINT fk_favorite_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
+  CONSTRAINT fk_favorite_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
+  CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (group_id),
+  CONSTRAINT ui1_favorite_user_contact_group UNIQUE (user_id, contact_id, group_id)
 );
 DROP TABLE IF EXISTS `res_pwd_token`;
 CREATE TABLE IF NOT EXISTS `res_pwd_token` (
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `group_contact` (
   `id_group_contact` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `group_id`         INTEGER NOT NULL,
   `contact_id`       INTEGER NOT NULL,
-  CONSTRAINT fk_group_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
-  CONSTRAINT fk_contact_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
-  CONSTRAINT ui1_group_contact_contact_id_group_id UNIQUE (contact_id, group_id)
+  CONSTRAINT fk_group_contact_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
+  CONSTRAINT fk_group_contact_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
+  CONSTRAINT ui1_group_contact_contact_group UNIQUE (contact_id, group_id)
 );
