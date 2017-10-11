@@ -1,23 +1,33 @@
 package org.cubalibre.familink.api.entities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "contact")
 public class Contact {
-    private static final Logger LOG = LoggerFactory.getLogger(Contact.class.getName());
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_contact")
     private Integer id;
+    @Column(name = "lastname")
     private String lastName;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "phone")
     private String phone;
+    @ManyToOne
+    @JoinColumn(name = "profil_id")
     private Profil profil;
+    @Column(name = "address")
     private String address;
+    @Column(name = "zipcode")
     private String zipcode;
+    @Column(name = "city")
     private String city;
+    @Column(name = "gravatar")
     private String gravatar;
 
     public Contact() {
-        LOG.info("Contact");
     }
 
     public Contact(String lastName, String firstName, String phone, Profil profil, String address, String zipcode, String city, String gravatar) {
