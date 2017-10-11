@@ -8,4 +8,6 @@ public interface IProfilService {
 
     List<Profil> getProfils();
 
+    Profil getProfilById(int id);
+
 }

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author Nicolas Hodicq (nhodicq@sqli.com)
- */
 @Service(value = "profilService")
 public class ProfilService implements IProfilService {
 
@@ -21,5 +18,10 @@ public class ProfilService implements IProfilService {
     public List<Profil> getProfils() {
 
         return profilRepository.findAll();
+    }
+
+    @Override
+    public Profil getProfilById(int id) {
+        return profilRepository.findOne(id);
     }
 }
