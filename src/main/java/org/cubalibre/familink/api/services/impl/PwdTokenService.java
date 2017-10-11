@@ -32,14 +32,14 @@ public class PwdTokenService implements IPwdTokenService {
     }
 
     @Override
-    public void update(PwdToken pwdTokenToUpdate) {
+    public void update(PwdToken toUpdate) {
 
-        final PwdToken toUpdate = pwdTokenRepository.findOne(pwdTokenToUpdate.getId());
+        final PwdToken pwdTokenToUpdate = pwdTokenRepository.findOne(toUpdate.getId());
 
         if (toUpdate != null) {
-            toUpdate.setToken(pwdTokenToUpdate.getToken());
-            toUpdate.setUsed(pwdTokenToUpdate.isUsed());
-            pwdTokenRepository.save(toUpdate);
+            pwdTokenToUpdate.setToken(toUpdate.getToken());
+            pwdTokenToUpdate.setUsed(toUpdate.isUsed());
+            pwdTokenRepository.save(pwdTokenToUpdate);
         }
     }
 

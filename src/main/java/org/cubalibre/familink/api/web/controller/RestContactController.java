@@ -31,4 +31,12 @@ public class RestContactController {
     public Contact getContactById(@PathVariable("id") String id) {
         return contactService.getContactById(Integer.parseInt(id));
     }
+
+    // ******* UPDATE CONTACT  ******** //
+    @RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+    @ResponseBody
+    public void updateContact(@RequestBody Contact updateContact) {
+
+        contactService.update(updateContact);
+    }
 }

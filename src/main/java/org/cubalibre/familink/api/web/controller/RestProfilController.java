@@ -32,7 +32,7 @@ public class RestProfilController {
         return profilService.getProfilById(Integer.parseInt(id));
     }
 
-    // ******* UPDATE PROFIL BY ID ******** //
+    // ******* UPDATE PROFIL  ******** //
     @RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
     @ResponseBody
     public void updateProfil(@RequestBody Profil updateProfil) {

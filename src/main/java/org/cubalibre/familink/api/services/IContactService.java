@@ -28,4 +28,11 @@ public interface IContactService {
      */
     Contact getContactById(int id);
 
+    /**
+     * Mise à jour d'un Contact
+     *
+     * @param contact
+     */
+    void update(Contact contact);
+
 }

@@ -38,4 +38,26 @@ public class ContactService implements IContactService {
 
         return contactRepository.findOne(id);
     }
+
+    @Override
+    public void update(Contact toUpdate) {
+
+        final Contact contactToUpdate = contactRepository.findOne(toUpdate.getId());
+
+        if (contactToUpdate != null) {
+            contactToUpdate.setLastName(toUpdate.getLastName());
+            contactToUpdate.setFirstName(toUpdate.getFirstName());
+            contactToUpdate.setPhone(toUpdate.getPhone());
+            if (toUpdate.getProfil() != null) {
+                final Profil profilToUpdate = profilService.getProfilById(toUpdate.getProfil().getId());
+                contactToUpdate.setProfil(toUpdate.getProfil());
+            }
+            contactToUpdate.setAddress(toUpdate.getAddress());
+            contactToUpdate.setZipcode(toUpdate.getZipcode());
+            contactToUpdate.setCity(toUpdate.getCity());
+            contactToUpdate.setGravatar(toUpdate.getGravatar());
+
+            contactRepository.save(toUpdate);
+        }
+    }
 }

@@ -32,14 +32,14 @@ public class ProfilService implements IProfilService {
     }
 
     @Override
-    public void update(Profil profilToUpdate) {
+    public void update(Profil toUpdate) {
 
-        final Profil toUpdate = profilRepository.findOne(profilToUpdate.getId());
+        final Profil profilToUpdate = profilRepository.findOne(toUpdate.getId());
 
         if (toUpdate != null) {
-            toUpdate.setType(profilToUpdate.getType());
-            toUpdate.setColor(profilToUpdate.getColor());
-            profilRepository.save(toUpdate);
+            profilToUpdate.setType(toUpdate.getType());
+            profilToUpdate.setColor(toUpdate.getColor());
+            profilRepository.save(profilToUpdate);
         }
     }
 
