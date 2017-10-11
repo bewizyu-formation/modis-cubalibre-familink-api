@@ -1,15 +1,24 @@
 package org.cubalibre.familink.api.entities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "user")
 public class User {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(User.class.getName());
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
 	private int id;
+
+	@Column(name = "mail")
 	private String mail;
+
+	@Column(name = "password")
 	private String password;
+
+	@OneToOne
+	@JoinColumn(name = "contact_id")
 	private Contact contact;
 
 	/**
@@ -31,7 +40,6 @@ public class User {
 	 * Contructor vide
 	 */
 	public User() {
-		LOG.info("User");
 	}
 
 	/**
