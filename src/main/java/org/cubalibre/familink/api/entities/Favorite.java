@@ -13,34 +13,34 @@ public class Favorite {
 
     private static final Logger LOG = LoggerFactory.getLogger(Favorite.class.getName());
 
-    @Column(name = "id_group")
-    private Integer id_groupe;
+    @Column(name = "group_id")
+    private Integer idGroupe;
 
-    @Column(name = "id_uder")
-    private Integer id_user;
+    @Column(name = "user_id")
+    private Integer idUser;
 
-    @Column(name = "id_contact")
-    private Integer id_contact;
+    @Column(name = "contact_id")
+    private Integer idContact;
 
     public Favorite() {
         LOG.info("Favorite");
     }
 
-    public Favorite(Integer id_groupe, Integer id_user, Integer id_contact) {
-        this.id_groupe = id_groupe;
-        this.id_user = id_user;
-        this.id_contact = id_contact;
+    public Favorite(Integer idGroupe, Integer idUser, Integer idContact) {
+        this.idGroupe = idGroupe;
+        this.idUser = idUser;
+        this.idContact = idContact;
     }
 
-    public Integer getId_groupe() {
-        return id_groupe;
+    public Integer getIdGroupe() {
+        return idGroupe;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public Integer getId_contact() {
-        return id_contact;
+    public Integer getIdContact() {
+        return idContact;
     }
 }
