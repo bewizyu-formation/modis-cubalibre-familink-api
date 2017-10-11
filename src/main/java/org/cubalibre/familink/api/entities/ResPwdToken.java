@@ -14,7 +14,7 @@ public class ResPwdToken {
     @Column(name = "token")
     private String token;
 
-    @Column(name = "isUsed")
+    @Column(name = "is_used")
     private boolean isUsed;
 
     /**
