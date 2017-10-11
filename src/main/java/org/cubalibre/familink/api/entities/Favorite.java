@@ -14,7 +14,7 @@ public class Favorite {
     private static final Logger LOG = LoggerFactory.getLogger(Favorite.class.getName());
 
     @Column(name = "group_id")
-    private Integer idGroupe;
+    private Integer idGroup;
 
     @Column(name = "user_id")
     private Integer idUser;
@@ -26,14 +26,14 @@ public class Favorite {
         LOG.info("Favorite");
     }
 
-    public Favorite(Integer idGroupe, Integer idUser, Integer idContact) {
-        this.idGroupe = idGroupe;
+    public Favorite(Integer idGroup, Integer idUser, Integer idContact) {
+        this.idGroup = idGroup;
         this.idUser = idUser;
         this.idContact = idContact;
     }
 
-    public Integer getIdGroupe() {
-        return idGroupe;
+    public Integer getIdGroup() {
+        return idGroup;
     }
 
     public Integer getIdUser() {
