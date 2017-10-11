@@ -17,4 +17,5 @@ public interface IUserService {
      * @param newUser nouveau User
      */
     User create(User newUser);
+
 }

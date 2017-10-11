@@ -9,4 +9,6 @@ public interface IContactService {
      * @param newContact nouveau Contact
      */
     Contact create(Contact newContact);
+
+    Contact getContactById(int id);
 }

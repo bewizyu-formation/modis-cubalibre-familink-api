@@ -1,5 +1,6 @@
 package org.cubalibre.familink.api.services.impl;
 
+import org.cubalibre.familink.api.entite.Contact;
 import org.cubalibre.familink.api.entite.User;
 import org.cubalibre.familink.api.repository.UserRepository;
 import org.cubalibre.familink.api.services.IUserService;
@@ -21,9 +22,14 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+    @Autowired
+    private ContactService contactService;
 
 	@Override
 	public User create(User newUser) {
-		return userRepository.save(newUser);
+        LOG.info(String.valueOf(newUser.getContact().getId()));
+        Contact contactId = contactService.getContactById(newUser.getContact().getId());
+        newUser.setContact(contactId);
+        return userRepository.save(newUser);
 	}
 }
