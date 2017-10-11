@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `favorite` (
   `group_id`   INTEGER NOT NULL,
   CONSTRAINT fk_favorite_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
   CONSTRAINT fk_favorite_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
-  CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (group_id),
+  CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
   CONSTRAINT ui1_favorite_user_contact_group UNIQUE (user_id, contact_id, group_id)
 );
 DROP TABLE IF EXISTS `res_pwd_token`;
