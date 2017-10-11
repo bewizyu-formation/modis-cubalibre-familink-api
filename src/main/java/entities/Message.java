@@ -55,8 +55,10 @@ public class Message {
         return isRead;
     }
 
-    public boolean hasRead() {
-        return hasRead();
+    public void setAsRead() {
+       if (!isRead){
+           this.isRead = true;
+       }
     }
 
     public Group getGroup() {
