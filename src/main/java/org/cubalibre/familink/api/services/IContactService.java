@@ -28,10 +28,17 @@ public interface IContactService {
     Contact getContactById(int id);
 
     /**
+     * Mise à jour d'un Contact
+     *
+     * @param contact
+     */
+    void update(Contact contact);
+
+    /**
      * Suppression d'un Contact by id
      *
      * @param id
      */
-    void deleteContact(int id);
+    void delete (int id);
 
 }

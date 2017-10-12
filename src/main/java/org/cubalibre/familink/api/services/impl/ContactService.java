@@ -33,7 +33,26 @@ public class ContactService implements IContactService {
     }
 
     @Override
-    public void deleteContact(int id) {
+    public void update(Contact toUpdate) {
+
+        final Contact contactToUpdate = contactRepository.findOne(toUpdate.getId());
+
+        if (contactToUpdate != null) {
+            contactToUpdate.setLastName(toUpdate.getLastName());
+            contactToUpdate.setFirstName(toUpdate.getFirstName());
+            contactToUpdate.setPhone(toUpdate.getPhone());
+            contactToUpdate.setProfil(toUpdate.getProfil());
+            contactToUpdate.setAddress(toUpdate.getAddress());
+            contactToUpdate.setZipcode(toUpdate.getZipcode());
+            contactToUpdate.setCity(toUpdate.getCity());
+            contactToUpdate.setGravatar(toUpdate.getGravatar());
+
+            contactRepository.save(toUpdate);
+        }
+    }
+
+    @Override
+    public void delete (int id) {
 
         contactRepository.delete(id);
     }

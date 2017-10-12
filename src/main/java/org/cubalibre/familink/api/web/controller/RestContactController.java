@@ -28,9 +28,9 @@ public class RestContactController {
     @RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     public Contact createContact(@RequestBody Contact newContact) {
 
-        Profil profilNewContact = profilService.getProfilById(newContact.getProfil().getId());
-        if (profilNewContact != null) {
-            newContact.setProfil(profilNewContact);
+        Profil existingProfil = profilService.getProfilById(newContact.getProfil().getId());
+        if (existingProfil != null) {
+            newContact.setProfil(existingProfil);
         }
 
         return contactService.create(newContact);
@@ -44,12 +44,24 @@ public class RestContactController {
         return contactService.getContactById(id);
     }
 
+    // ******* UPDATE CONTACT BY ID ******** //
+    @RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+    @ResponseBody
+    public void updateContact(@RequestBody Contact contactToUpdate) {
+        final Profil existingProfil = profilService.getProfilById(contactToUpdate.getProfil().getId());
+        if (existingProfil != null) {
+            contactToUpdate.setProfil(existingProfil);
+        }
+
+        contactService.update(contactToUpdate);
+    }
+
     // ******* DELETE CONTACT BY ID ******** //
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteContact(@PathVariable("id") int id) {
 
-        contactService.deleteContact(id);
+        contactService.delete (id);
     }
 
 }
