@@ -16,18 +16,22 @@ public class ProfilService implements IProfilService {
 
     @Override
     public List<Profil> getProfils() {
+
         return profilRepository.findAll();
     }
 
     @Override
     public Profil create(Profil newProfil) {
+
         String type = newProfil.getType().toUpperCase();
         newProfil.setType(type);
+
         return profilRepository.save(newProfil);
     }
 
     @Override
     public Profil getProfilById(int id) {
+
         return profilRepository.findOne(id);
     }
 
