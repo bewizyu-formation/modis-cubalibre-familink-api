@@ -28,8 +28,8 @@ public class RestProfilController {
     // ******* GET PROFIL BY ID ********** //
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Profil getProfilById(@PathVariable("id") String id) {
-        return profilService.getProfilById(Integer.parseInt(id));
+    public Profil getProfilById(@PathVariable("id") int id) {
+        return profilService.getProfilById(id);
     }
 
     // ******* UPDATE PROFIL BY ID ******** //
@@ -43,7 +43,8 @@ public class RestProfilController {
     // ******* DELETE PROFIL BY ID ******** //
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteProfil(@PathVariable("id") String id) {
-        profilService.deleteProfil(Integer.parseInt(id));
+    public void deleteProfil(@PathVariable("id") int id) {
+
+        profilService.deleteProfil(id);
     }
 }

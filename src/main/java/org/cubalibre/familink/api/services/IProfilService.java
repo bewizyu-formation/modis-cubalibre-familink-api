@@ -42,6 +42,6 @@ public interface IProfilService {
      *
      * @param id
      */
-    void deleteProfil(final int id);
+    void deleteProfil(int id);
 
 }
