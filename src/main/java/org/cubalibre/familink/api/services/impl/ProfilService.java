@@ -16,11 +16,16 @@ public class ProfilService implements IProfilService {
 
     @Override
     public List<Profil> getProfils() {
+
         return profilRepository.findAll();
     }
 
     @Override
     public Profil create(Profil newProfil) {
+
+        String type = newProfil.getType().toUpperCase();
+        newProfil.setType(type);
+
         return profilRepository.save(newProfil);
     }
 
@@ -35,7 +40,7 @@ public class ProfilService implements IProfilService {
         final Profil toUpdate = profilRepository.findOne(profilToUpdate.getId());
 
         if (toUpdate != null) {
-            toUpdate.setType(profilToUpdate.getType());
+            toUpdate.setType(profilToUpdate.getType().toUpperCase());
             toUpdate.setColor(profilToUpdate.getColor());
             profilRepository.save(toUpdate);
         }
