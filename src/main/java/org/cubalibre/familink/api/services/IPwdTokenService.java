@@ -2,16 +2,7 @@ package org.cubalibre.familink.api.services;
 
 import org.cubalibre.familink.api.entite.PwdToken;
 
-import java.util.List;
-
 public interface IPwdTokenService {
-
-    /**
-     * Extrait tous les tokens existants
-     *
-     * @return
-     */
-    List<PwdToken> getPwdTokens();
 
     /**
      * Creer un nouveau PwdToken
@@ -34,12 +25,4 @@ public interface IPwdTokenService {
      * @param pwdToken
      */
     void update(PwdToken pwdToken);
-
-    /**
-     * Suppression d'un PwdToken by id
-     *
-     * @param id
-     */
-    void deletePwdToken(final int id);
-
 }

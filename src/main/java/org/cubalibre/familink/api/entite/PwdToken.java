@@ -56,6 +56,9 @@ public class PwdToken {
     }
 
     public void setUsed(boolean used) {
-        isUsed = used;
+        if (!used) {
+            this.isUsed = true;
+        }
     }
+
 }

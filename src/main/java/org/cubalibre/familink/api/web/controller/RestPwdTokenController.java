@@ -39,12 +39,4 @@ public class RestPwdTokenController {
 
         pwdTokenService.update(updatePwdToken);
     }
-
-    // ******* DELETE PASSWORD TOKEN BY ID ******** //
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public void deleteProfil(@PathVariable("id") String id) {
-        pwdTokenService.deletePwdToken(Integer.parseInt(id));
-
-    }
 }
