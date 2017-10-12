@@ -26,4 +26,12 @@ public interface IContactService {
      * @return
      */
     Contact getContactById(int id);
+
+    /**
+     * Suppression d'un Contact by id
+     *
+     * @param id
+     */
+    void deleteContact(int id);
+
 }

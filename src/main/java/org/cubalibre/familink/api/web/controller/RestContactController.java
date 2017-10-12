@@ -44,4 +44,12 @@ public class RestContactController {
         return contactService.getContactById(id);
     }
 
+    // ******* DELETE CONTACT BY ID ******** //
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteContact(@PathVariable("id") int id) {
+
+        contactService.deleteContact(id);
+    }
+
 }

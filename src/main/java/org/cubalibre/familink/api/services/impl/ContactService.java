@@ -32,4 +32,10 @@ public class ContactService implements IContactService {
         return contactRepository.findOne(id);
     }
 
+    @Override
+    public void deleteContact(int id) {
+
+        contactRepository.delete(id);
+    }
+
 }
