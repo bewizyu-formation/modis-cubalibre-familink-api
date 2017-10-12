@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "res_pwd_token")
-public class ResPwdToken {
+public class PwdToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class ResPwdToken {
      *
      * @return
      */
-    public ResPwdToken() {
+    public PwdToken() {
 
     }
 
@@ -33,7 +33,7 @@ public class ResPwdToken {
      * @param token
      * @param isUsed
      */
-    public ResPwdToken(Integer id, String token, boolean isUsed) {
+    public PwdToken(Integer id, String token, boolean isUsed) {
         this.id = id;
         this.token = token;
         this.isUsed = isUsed;

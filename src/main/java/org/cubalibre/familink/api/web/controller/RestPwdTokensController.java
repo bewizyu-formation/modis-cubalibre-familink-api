@@ -1,7 +1,7 @@
 package org.cubalibre.familink.api.web.controller;
 
-import org.cubalibre.familink.api.entite.Profil;
-import org.cubalibre.familink.api.services.IProfilService;
+import org.cubalibre.familink.api.entite.PwdToken;
+import org.cubalibre.familink.api.services.IPwdTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/profils")
-public class RestProfilsController {
+@RequestMapping("/pwdTokens")
+public class RestPwdTokensController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RestProfilsController.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(RestPwdTokensController.class.getName());
 
     @Autowired
-    @Qualifier("profilService")
-    private IProfilService profilService;
+    @Qualifier("pwdTokenService")
+    private IPwdTokenService pwdTokenService;
 
 
-    // ********** GET PROFILS ********** //
+    // ********** GET PASSWORD TOKENS ********** //
     @RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public List<Profil> getProfils() {
+    public List<PwdToken> getPwdTokens() {
 
-        return profilService.getProfils();
+        return pwdTokenService.getPwdTokens();
     }
 
 }
