@@ -8,7 +8,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contact")
-    private Integer id;
+    private int id;
 
     @Column(name = "lastname")
     private String lastName;
@@ -69,7 +69,7 @@ public class Contact {
      *
      * @return
      */
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

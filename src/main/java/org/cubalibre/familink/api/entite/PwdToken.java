@@ -9,7 +9,7 @@ public class PwdToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_token")
-    private Integer id;
+    private int id;
 
     @Column(name = "token")
     private String token;
@@ -39,7 +39,7 @@ public class PwdToken {
         this.isUsed = isUsed;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
