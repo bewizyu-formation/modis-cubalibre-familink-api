@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS familink;
-CREATE DATABASE IF NOT EXISTS familink;
-USE familink;
+DROP DATABASE IF EXISTS `familink`;
+CREATE DATABASE IF NOT EXISTS `familink`;
+USE `familink`;
 DROP TABLE IF EXISTS `profil`;
 CREATE TABLE IF NOT EXISTS `profil` (
   `id_profil` INTEGER     NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -17,30 +17,21 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `address`    VARCHAR(50),
   `zipcode`    VARCHAR(5),
   `city`       VARCHAR(50),
-  `gravatar`   VARCHAR(255),
-  CONSTRAINT fk_contact_profil_id
-  FOREIGN KEY (profil_id) REFERENCES
-    profil (id_profil)
+  `gravatar`   VARCHAR(255)
 );
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id_user`    INTEGER      NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `mail`       VARCHAR(100) NOT NULL,
   `password`   VARCHAR(255) NOT NULL,
-  `contact_id` INTEGER      NOT NULL,
-  CONSTRAINT ui1_user_mail UNIQUE (mail),
-  CONSTRAINT fk_user_contact_id
-  FOREIGN KEY (contact_id) REFERENCES
-    contact (id_contact)
+  `contact_id` INTEGER      NOT NULL
 );
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE IF NOT EXISTS `group` (
   `id_group`    INTEGER      NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `owner`       INTEGER      NOT NULL,
   `name`        VARCHAR(100) NOT NULL,
-  `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT ui1_group_name UNIQUE (name),
-  CONSTRAINT u12_group_owner UNIQUE (owner)
+  `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP
 );
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
@@ -50,20 +41,13 @@ CREATE TABLE IF NOT EXISTS `message` (
   `text`        VARCHAR(140) NOT NULL,
   `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP,
   `group_id`    INTEGER      NOT NULL,
-  `isRead`      BOOLEAN      NOT NULL             DEFAULT FALSE,
-  CONSTRAINT fk_message_sender FOREIGN KEY (sender) REFERENCES contact (id_contact),
-  CONSTRAINT fk_message_receiver FOREIGN KEY (receiver) REFERENCES contact (id_contact),
-  CONSTRAINT fk_message_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group)
+  `isRead`      BOOLEAN      NOT NULL             DEFAULT FALSE
 );
 DROP TABLE IF EXISTS `favorite`;
 CREATE TABLE IF NOT EXISTS `favorite` (
   `user_id`    INTEGER NOT NULL,
   `contact_id` INTEGER NOT NULL,
-  `group_id`   INTEGER NOT NULL,
-  CONSTRAINT fk_favorite_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
-  CONSTRAINT fk_favorite_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
-  CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
-  CONSTRAINT ui1_favorite_user_contact_group UNIQUE (user_id, contact_id, group_id)
+  `group_id`   INTEGER NOT NULL
 );
 DROP TABLE IF EXISTS `res_pwd_token`;
 CREATE TABLE IF NOT EXISTS `res_pwd_token` (
@@ -75,8 +59,27 @@ DROP TABLE IF EXISTS `group_contact`;
 CREATE TABLE IF NOT EXISTS `group_contact` (
   `id_group_contact` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `group_id`         INTEGER NOT NULL,
-  `contact_id`       INTEGER NOT NULL,
-  CONSTRAINT fk_group_contact_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
-  CONSTRAINT fk_group_contact_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
-  CONSTRAINT ui1_group_contact_contact_group UNIQUE (contact_id, group_id)
+  `contact_id`       INTEGER NOT NULL
 );
+ALTER TABLE `contact`
+  ADD CONSTRAINT `fk_contact_profil_id` FOREIGN KEY (profil_id) REFERENCES profil (id_profil);
+ALTER TABLE `user`
+  ADD CONSTRAINT ui1_user_mail UNIQUE (mail),
+  ADD CONSTRAINT fk_user_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact);
+ALTER TABLE `group`
+  ADD CONSTRAINT ui1_group_name UNIQUE (name),
+  ADD CONSTRAINT ui2_group_owner UNIQUE (owner),
+  ADD CONSTRAINT fk_group_owner FOREIGN KEY (owner) REFERENCES user (id_user);
+ALTER TABLE `message`
+  ADD CONSTRAINT fk_message_sender FOREIGN KEY (sender) REFERENCES contact (id_contact),
+  ADD CONSTRAINT fk_message_receiver FOREIGN KEY (receiver) REFERENCES contact (id_contact),
+  ADD CONSTRAINT fk_message_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group);
+ALTER TABLE `favorite`
+  ADD CONSTRAINT fk_favorite_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
+  ADD CONSTRAINT fk_favorite_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
+  ADD CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
+  ADD CONSTRAINT ui1_favorite_group_user_contact UNIQUE (user_id, contact_id, group_id);
+ALTER TABLE `group_contact`
+  ADD CONSTRAINT fk_group_contact_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
+  ADD CONSTRAINT fk_group_contact_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
+  ADD CONSTRAINT ui1_group_contact UNIQUE (contact_id, group_id);
