@@ -21,8 +21,10 @@ public class RestContactController {
     @Qualifier("contactService")
     private IContactService contactService;
 
+    // ********** CREATE CONTACT ********** //
     @RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     public Contact createContact(@RequestBody Contact newContact) {
+
         return contactService.create(newContact);
     }
 

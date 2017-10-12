@@ -24,7 +24,7 @@ public class RestProfilsController {
     private IProfilService profilService;
 
 
-    // ********** CREATE PROFILS ********** //
+    // ********** GET PROFILS ********** //
     @RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<Profil> getProfils() {
