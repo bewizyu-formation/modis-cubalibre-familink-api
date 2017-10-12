@@ -21,6 +21,34 @@ public class User {
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     /**
      * Constructor
      *
@@ -40,30 +68,5 @@ public class User {
      * Contructor vide
      */
     public User() {
-    }
-
-    /**
-     * GETTERS & SETTERS
-     *
-     * @return
-     */
-    public int getId() {
-        return id;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Contact getContact() {
-        return contact;
     }
 }

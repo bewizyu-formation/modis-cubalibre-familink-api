@@ -24,4 +24,10 @@ public class ContactService implements IContactService {
 
         return contactRepository.save(newContact);
     }
+
+    @Override
+    public Contact getContactById(int id) {
+        return contactRepository.findOne(id);
+    }
+
 }

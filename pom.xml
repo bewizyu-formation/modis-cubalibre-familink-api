@@ -177,7 +177,7 @@
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost:3306/familink?useSSL=false</jdbc.url>
 				<jdbc.user>root</jdbc.user>
-				<jdbc.pass>1234</jdbc.pass>
+				<jdbc.pass>rootPwd</jdbc.pass>
 				<!--<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>-->
 				<!--<jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>-->
 				<!--<jdbc.connections.max.active>5</jdbc.connections.max.active>-->

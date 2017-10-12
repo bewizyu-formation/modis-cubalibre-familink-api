@@ -45,6 +45,5 @@ public class RestProfilController {
     @ResponseBody
     public void deleteProfil(@PathVariable("id") String id) {
         profilService.deleteProfil(Integer.parseInt(id));
-
     }
 }
