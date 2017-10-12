@@ -36,9 +36,7 @@ public interface IProfilService {
     void update(Profil profil);
 
     /**
-
      * Suppression d'un Profil by id
-
      *
      * @param id
      */
