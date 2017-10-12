@@ -14,7 +14,7 @@ public class Profil {
     @Id
     @Column(name = "id_profil")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "type")
     private String type;
@@ -37,13 +37,13 @@ public class Profil {
      * @param type
      * @param color
      */
-    public Profil(int id, String type, String color) {
+    public Profil(Integer id, String type, String color) {
         this.id = id;
         this.type = type;
         this.color = color;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

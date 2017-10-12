@@ -27,9 +27,10 @@ public class ContactService implements IContactService {
     @Override
     public Contact create(Contact newContact) {
 
-        Profil contactProfil = profilService.getProfilById(newContact.getProfil().getId());
-        newContact.setProfil(contactProfil);
-
+        Profil profilNewContact = profilService.getProfilById(newContact.getProfil().getId());
+        if (profilNewContact != null) {
+            newContact.setProfil(profilNewContact);
+        }
         return contactRepository.save(newContact);
     }
 
@@ -50,7 +51,9 @@ public class ContactService implements IContactService {
             contactToUpdate.setPhone(toUpdate.getPhone());
             if (toUpdate.getProfil() != null) {
                 final Profil profilToUpdate = profilService.getProfilById(toUpdate.getProfil().getId());
-                contactToUpdate.setProfil(toUpdate.getProfil());
+                if (profilToUpdate != null) {
+                    contactToUpdate.setProfil(profilToUpdate);
+                }
             }
             contactToUpdate.setAddress(toUpdate.getAddress());
             contactToUpdate.setZipcode(toUpdate.getZipcode());
