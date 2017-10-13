@@ -32,4 +32,10 @@ public class UserService implements IUserService {
         newUser.setContact(contactId);
         return userRepository.save(newUser);
 	}
+
+    @Override
+    public User getUserById(int id) {
+
+        return userRepository.findOne(id);
+    }
 }
