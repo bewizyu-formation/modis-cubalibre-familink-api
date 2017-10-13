@@ -57,14 +57,16 @@ CREATE TABLE IF NOT EXISTS `res_pwd_token` (
 );
 DROP TABLE IF EXISTS `group_contact`;
 CREATE TABLE IF NOT EXISTS `group_contact` (
-  `id_group_contact` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `group_id`         INTEGER NOT NULL,
   `contact_id`       INTEGER NOT NULL
 );
+ALTER TABLE `profil`
+    ADD CONSTRAINT ui1_profil_type UNIQUE (type);
 ALTER TABLE `contact`
   ADD CONSTRAINT `fk_contact_profil_id` FOREIGN KEY (profil_id) REFERENCES profil (id_profil);
 ALTER TABLE `user`
   ADD CONSTRAINT ui1_user_mail UNIQUE (mail),
+  ADD CONSTRAINT ui2_user_contact_id UNIQUE (contact_id),
   ADD CONSTRAINT fk_user_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact);
 ALTER TABLE `group`
   ADD CONSTRAINT ui1_group_name UNIQUE (name),
@@ -78,8 +80,8 @@ ALTER TABLE `favorite`
   ADD CONSTRAINT fk_favorite_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
   ADD CONSTRAINT fk_favorite_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
   ADD CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
-  ADD CONSTRAINT ui1_favorite_group_user_contact UNIQUE (user_id, contact_id, group_id);
+  ADD CONSTRAINT ui1_fav_contact_per_group_per_user UNIQUE (user_id, contact_id, group_id);
 ALTER TABLE `group_contact`
   ADD CONSTRAINT fk_group_contact_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
   ADD CONSTRAINT fk_group_contact_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
-  ADD CONSTRAINT ui1_group_contact UNIQUE (contact_id, group_id);
+  ADD CONSTRAINT ui1_contact_per_group UNIQUE (contact_id, group_id);
