@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE IF NOT EXISTS `group` (
+  `id_group`    INTEGER      NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `owner`       INTEGER      NOT NULL,
   `name`        VARCHAR(100) NOT NULL,
   `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP
