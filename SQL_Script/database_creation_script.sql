@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password`   VARCHAR(255) NOT NULL,
   `contact_id` INTEGER      NOT NULL
 );
-DROP TABLE IF EXISTS `group`;
-CREATE TABLE IF NOT EXISTS `group` (
+DROP TABLE IF EXISTS `groupe`;
+CREATE TABLE IF NOT EXISTS `groupe` (
   `id_group`    INTEGER      NOT NULL PRIMARY KEY         AUTO_INCREMENT,
   `owner`       INTEGER      NOT NULL,
   `name`        VARCHAR(100) NOT NULL,
@@ -75,13 +75,13 @@ ALTER TABLE `group`
 ALTER TABLE `message`
   ADD CONSTRAINT fk_message_sender FOREIGN KEY (sender) REFERENCES contact (id_contact),
   ADD CONSTRAINT fk_message_receiver FOREIGN KEY (receiver) REFERENCES contact (id_contact),
-  ADD CONSTRAINT fk_message_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group);
+  ADD CONSTRAINT fk_message_group_id FOREIGN KEY (group_id) REFERENCES `groupe` (id_group);
 ALTER TABLE `favorite`
   ADD CONSTRAINT fk_favorite_user_id FOREIGN KEY (user_id) REFERENCES user (id_user),
   ADD CONSTRAINT fk_favorite_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
-  ADD CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
+  ADD CONSTRAINT fk_favorite_group_id FOREIGN KEY (group_id) REFERENCES `groupe` (id_group),
   ADD CONSTRAINT ui1_fav_contact_per_group_per_user UNIQUE (user_id, contact_id, group_id);
 ALTER TABLE `group_contact`
-  ADD CONSTRAINT fk_group_contact_group_id FOREIGN KEY (group_id) REFERENCES `group` (id_group),
+  ADD CONSTRAINT fk_group_contact_group_id FOREIGN KEY (group_id) REFERENCES `groupe` (id_group),
   ADD CONSTRAINT fk_group_contact_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact),
   ADD CONSTRAINT ui1_contact_per_group UNIQUE (contact_id, group_id);
