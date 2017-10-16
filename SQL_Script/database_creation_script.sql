@@ -28,10 +28,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE IF NOT EXISTS `group` (
-  `id_group`    INTEGER      NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id_group`    INTEGER      NOT NULL PRIMARY KEY         AUTO_INCREMENT,
   `owner`       INTEGER      NOT NULL,
   `name`        VARCHAR(100) NOT NULL,
-  `create_date` TIMESTAMP    NOT NULL             DEFAULT CURRENT_TIMESTAMP
+  `create_date` TIMESTAMP    NULL                         DEFAULT CURRENT_TIMESTAMP
 );
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
@@ -57,11 +57,11 @@ CREATE TABLE IF NOT EXISTS `res_pwd_token` (
 );
 DROP TABLE IF EXISTS `group_contact`;
 CREATE TABLE IF NOT EXISTS `group_contact` (
-  `group_id`         INTEGER NOT NULL,
-  `contact_id`       INTEGER NOT NULL
+  `group_id`   INTEGER NOT NULL,
+  `contact_id` INTEGER NOT NULL
 );
 ALTER TABLE `profil`
-    ADD CONSTRAINT ui1_profil_type UNIQUE (type);
+  ADD CONSTRAINT ui1_profil_type UNIQUE (type);
 ALTER TABLE `contact`
   ADD CONSTRAINT `fk_contact_profil_id` FOREIGN KEY (profil_id) REFERENCES profil (id_profil);
 ALTER TABLE `user`
