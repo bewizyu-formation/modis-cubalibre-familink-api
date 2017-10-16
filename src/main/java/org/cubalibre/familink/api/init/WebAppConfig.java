@@ -43,10 +43,9 @@ public class WebAppConfig {
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(getTokenInterceptor())
-                        .excludePathPatterns("/profil");
+                        .excludePathPatterns("/profil/");
                         //.excludePathPatterns("/auth");
                         //.excludePathPatterns("/reinitPass");
-                       // .excludePathPatterns("/user/create");
                       }
         };
     }
