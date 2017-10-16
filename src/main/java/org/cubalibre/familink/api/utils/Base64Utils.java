@@ -1,9 +1,7 @@
 package org.cubalibre.familink.api.utils;
 
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
-import java.util.Date;
 
 public class Base64Utils {
 
@@ -16,38 +14,22 @@ public class Base64Utils {
         return new String(base64DecodedValue, StandardCharsets.UTF_8);
     }
 
-    public static boolean isValidToken(String decodedToken) {
-        boolean isValid;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmss");
-
-        try {
-            Date date = new Date();
-            date.setTime(date.getTime() + 1 * 60 * 1000);
-            Date date2 = formatter.parse(decodedToken);
-            isValid = (date2.before(date));
-
-        } catch (Exception e) {
-            isValid = false;
-            System.out.println(e.getMessage());
-        }
-        return isValid;
-    }
-
     public static void main(String[] args) throws Exception {
-        String test = "try this howto";
+        // userID = 105
+        // timestamp = 1507495532
+        String token = "105-1507495532";
 
-        String res1 = Base64Utils.encode(test);
+        String encodedToken = Base64Utils.encode(token);
         System.out.println
-                (test + " base64 -> " + res1);
+                (token + " base64 -> " + encodedToken);
 
-        //
-        String res2 = Base64Utils.decode(res1);
-        System.out.println( res1 + " string --> "  + res2);
+        String decodedToken = Base64Utils.decode(encodedToken);
+        System.out.println( encodedToken + " string --> "  + decodedToken);
 
       /*
-       * output
-       *   try this howto base64 -> dHJ5IHRoaXMgaG93dG8=
-       *   dHJ5IHRoaXMgaG93dG8= string --> try this howto
+       * OUTPUT :
+       * 105-1507495532 base64 -> MTA1LTE1MDc0OTU1MzI=
+       *  MTA1LTE1MDc0OTU1MzI= string --> 105-1507495532
        */
     }
 
