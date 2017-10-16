@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "group")
+@Table(name = "groupe")
 public class Group {
 
     @Id
@@ -20,8 +20,9 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "create_date")
-    private Date createDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = true)
+    private Date createDate = new Date();
 
     @JoinTable
     @ManyToMany
@@ -33,39 +34,6 @@ public class Group {
      */
     public Group() {
 
-    }
-
-    /**
-     * Constructor
-     * @param owner
-     * @param name
-     * @param createDate
-     * @param contacts
-     *
-     */
-    public Group(User owner, String name, Date createDate, List<Contact> contacts) {
-        this.id = id;
-        this.owner = owner;
-        this.name = name;
-        this.createDate = createDate;
-        this.contacts = contacts;
-    }
-
-    /**
-     * Constructor
-     * @param id
-     * @param owner
-     * @param name
-     * @param createDate
-     * @param contacts
-     *
-     */
-    public Group(Integer id, User owner, String name, Date createDate, List<Contact> contacts) {
-        this.id = id;
-        this.owner = owner;
-        this.name = name;
-        this.createDate = createDate;
-        this.contacts = contacts;
     }
 
     public Integer getId() {
