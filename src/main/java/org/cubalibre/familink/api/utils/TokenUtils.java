@@ -1,94 +1,47 @@
 package org.cubalibre.familink.api.utils;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class TokenUtils {
+    private static final int nbrMinValidToken = 15;
 
-    public static String generateToken(String userId) throws Exception {
-        Date date = new Date();
-        date.setTime(new Timestamp(System.currentTimeMillis()).getTime());
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-
-        String token = userId + "-" + formattedDate;
-        System.out.println ("generated TOKEN (before encode ) = " + token);
-
+    public static String generateToken(int userId) throws Exception {
+        long newValidTimeStamp = (System.currentTimeMillis() + nbrMinValidToken * 60 * 1000);
+        String token = userId + "-" + newValidTimeStamp;
         return Base64Utils.encode(token);
     }
 
-    public static boolean isValidToken(String decodedToken) {
-        boolean isValid;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        try {
-            String timeStampFromToken = getTimeStampFromToken(decodedToken);
-            Date tokenDate = formatter.parse(timeStampFromToken);
-
-            Date now = new Date();
-            now.setTime(now.getTime() + 1 * 60 * 1000);
-
-            isValid = tokenDate.before(now);
-        } catch (Exception e) {
-            isValid = false;
-            System.out.println(e.getMessage());
+    public static boolean isValidToken(String token) {
+        boolean isValid = false;
+        long currentTimeStamp = System.currentTimeMillis();
+        long timeStamp = getTimeStampFromToken(token);
+        if (timeStamp - currentTimeStamp > 0) {
+            isValid = true;
         }
-
-        System.out.println("isValid TOKEN = " + isValid);
-
         return isValid;
     }
 
-    public static String getUserIdFromToken(String decodedToken) {
-//        String[] parts = decodedToken.split("-");
-//        Integer userId = Integer.parseInt(parts[0]);
-
-        String userId = decodedToken.substring(0, decodedToken.indexOf("-"));
-        System.out.println("TOKEN userId = " + userId);
-
-        return userId;
+    public static String getUserIdFromToken(String token) {
+        return token.substring(0, token.indexOf("-"));
     }
 
-    public static String getTimeStampFromToken(String decodedToken) {
+    public static long getTimeStampFromToken(String decodedToken) {
         String timestamp = decodedToken.substring(decodedToken.indexOf("-") + 1, decodedToken.length());
-        System.out.println("TOKEN timestamp = " + timestamp);
-
-        return timestamp;
+        return Long.valueOf(timestamp);
     }
 
     public static void main(String[] args) throws Exception {
-        // GENERATE TOKEN
-        String userId = "105";
-
+        int userId = 105;
         String generatedToken = TokenUtils.generateToken(userId);
-        System.out.println ("generated TOKEN (base64) -> " + generatedToken);
-
-        String decodedToken = null;
+        String token = "";
         try {
-            decodedToken = Base64Utils.decode(generatedToken);
+            token = Base64Utils.decode(generatedToken);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        System.out.println ("decoded TOKEN = " + decodedToken);
-
-        // TOKEN IS VALID
-        boolean isValid = TokenUtils.isValidToken(decodedToken);
-        if(isValid) {
-            getUserIdFromToken(decodedToken);
-            getTimeStampFromToken(decodedToken);
+        if (TokenUtils.isValidToken(token)) {
+            System.out.println("VALID TOKEN");
         } else {
             System.out.println("INVALID TOKEN");
         }
-    /*
-    * OUTPUT :
-    *   generated TOKEN base64 -> MTA1LTIwMTctMTAtMTYgMDg6NTA6MjY=
-    *   decodedToken -> 105-2017-10-16 08:50:26
-    *   TOKEN timestamp = 2017-10-16 08:50:26
-    *   isValid TOKEN = true
-    *   TOKEN userId = 105
-    *   TOKEN timestamp = 2017-10-16 08:50:26
-    */
     }
 
 }
