@@ -1,0 +1,18 @@
+language: java
+sudo: false
+install: true
+addons:
+  sonarcloud:
+    organization: nartawak-github
+    token:
+      secure: B5jLwA40DhTrq79S5AROOFO3KSB3B+qC0l6z7u5JQXVWAvpfKiNLeoFTS9rumnYeV7WZsNIhJ+rpx25SWmKT/YevN/nSXXw+qahLhQavUhz3B7+aNnamC9Wq+Q/Sq4XeN6iZiHOfjm7ujFrF7p4jzEZfVBr8VXkklZpp5y9WIifM3Up9gd6sEdTLwT18POu1KGWCXJup5+1hfFTVbKIPz6GZwRkhMLoOi6j4mTyHGaGf5U5Zj98nzh87RmjDiX8B17TIBuHf4OZH0ucdmluatGhJ8OEFovg3asZIcMYmtNL538LFTI1xugRHqi/79a9pERTsu7Ty6kYlaHCVuLngENRH+YBnyrld/ipt1NoxchthtiysD+oldazEvZck2m02D9B667avmMP4muJY0lSUWWLbZccgSmTl24V8a4psNyMyE3d1vzGXKwFDPi2YLWgBS31417YvXyjT/DIthQHEtFXSXsTrhy3CiFW1t7LOKjo0PvtZJrlj3NiwlBvoUc9f7k+TH4nsCvAfBxfxwdemGcFogPJBGtzpC82K0oczwOvGTDO5p07UbfnV/sjevlcd3RexmyrC+JcNZmKgGGjdDYHODVQRiACYnpYiK2kmwNxYZPt2MALJDRNdVHfYw5w/w0dVcLJ6SR5z/ZDY2xchZYlOChi6DhZI3db7vHeJRHU=
+    branches:
+      - develop
+jdk:
+- oraclejdk8
+script:
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+  - "$HOME/.sonar/cache"
