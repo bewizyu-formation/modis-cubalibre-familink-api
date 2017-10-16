@@ -18,4 +18,11 @@ public interface IUserService {
      */
     User create(User newUser);
 
+    /**
+     * Récupération d'un User par son id
+     *
+     * @param id
+     * @return
+     */
+    User getUserById(int id);
 }
