@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author avl
  */
 
-@Service(value = "userService")
+@Service(value = "groupService")
 public class GroupService implements IGroupService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GroupService.class.getName());

@@ -5,6 +5,7 @@ import org.cubalibre.familink.api.entite.User;
 import org.cubalibre.familink.api.services.IGroupService;
 import org.cubalibre.familink.api.services.IUserService;
 import org.cubalibre.familink.api.utils.Base64Utils;
+import org.cubalibre.familink.api.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -26,21 +27,37 @@ public class RestGroupController {
 
     @RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
     public Group createGroup(@RequestBody String name, @RequestHeader HttpHeaders headers) {
+
+//        @RequestHeader(value = "Authorization", required = true) String requestToken
+
+//        @RequestHeader String Authorization
+
+//        final String authorization = httpRequest.getHeader("Authorization");
+//        if (authorization != null && authorization.startsWith("token")) {
+//            // Authorization: Basic base64credentials
+//            String base64Credentials = authorization.substring("Basic".length()).trim();
+//            String credentials = new String(Base64.getDecoder().decode(base64Credentials),
+//                    Charset.forName("UTF-8"));
+//            // credentials = username:password
+//            final String[] values = credentials.split("-", 2);
+//        }
+
         String token = null;
-        if (headers.containsKey("token")) {
-            token = headers.get("token").get(0);
+        if (headers.containsKey("Authorization")) {
+            token = headers.get("Authorization").get(0);
+        } else {
+            throw new IllegalArgumentException("UNAUTHORISED");
         }
 
         String decodedToken = null;
         try {
             decodedToken = Base64Utils.decode(token);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
-        if (Base64Utils.isValidToken(decodedToken)) {
-            String userId = decodedToken.substring(0, decodedToken.indexOf("-"));
-            System.out.println(userId);
+        if (TokenUtils.isValidToken(decodedToken)) {
+            String userId =  TokenUtils.getUserIdFromToken(decodedToken);
 
             Group groupToInsert;
 
