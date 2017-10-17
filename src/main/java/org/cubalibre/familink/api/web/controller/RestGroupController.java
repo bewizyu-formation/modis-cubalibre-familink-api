@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/group")
+@CrossOrigin(origins = "*", allowedHeaders = "authorization")
 public class RestGroupController {
 
     @Autowired
@@ -23,6 +24,7 @@ public class RestGroupController {
     private IUserService userService;
 
     @RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+    @ResponseBody
     public Group createGroup(@RequestBody Group group, @RequestHeader(value = "Authorization") String token) {
         String decodedToken = null;
         try {
