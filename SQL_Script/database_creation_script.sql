@@ -68,7 +68,7 @@ ALTER TABLE `user`
   ADD CONSTRAINT ui1_user_mail UNIQUE (mail),
   ADD CONSTRAINT ui2_user_contact_id UNIQUE (contact_id),
   ADD CONSTRAINT fk_user_contact_id FOREIGN KEY (contact_id) REFERENCES contact (id_contact);
-ALTER TABLE `group`
+ALTER TABLE `groupe`
   ADD CONSTRAINT ui1_group_name UNIQUE (name),
   ADD CONSTRAINT ui2_group_owner UNIQUE (owner),
   ADD CONSTRAINT fk_group_owner FOREIGN KEY (owner) REFERENCES user (id_user);
