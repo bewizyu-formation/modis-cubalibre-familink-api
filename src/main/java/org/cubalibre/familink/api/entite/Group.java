@@ -2,7 +2,8 @@ package org.cubalibre.familink.api.entite;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "groupe")
@@ -24,12 +25,15 @@ public class Group {
     @Column(name = "create_date", nullable = true)
     private Date createDate = new Date();
 
-    @JoinTable
+    @JoinTable(name = "group_contact", joinColumns = {@JoinColumn(name = "group_id", table = "groupe", referencedColumnName = "id_group",
+            foreignKey = @ForeignKey(name = "fk_group_contact_group_id"))},
+            inverseJoinColumns = @JoinColumn(name = "contact_id", table = "contact", referencedColumnName = "id_contact", foreignKey = @ForeignKey(name = "fk_group_contact_contact_id")))
     @ManyToMany
-    private List<Contact> contacts;
+    private Set<Contact> contacts = new HashSet<>();
 
     /**
      * Constuctor vide
+     *
      * @return
      */
     public Group() {
@@ -64,9 +68,12 @@ public class Group {
         this.createDate = createDate;
     }
 
-    public List<Contact> getContacts() {
+    public Set<Contact> getContacts() {
         return contacts;
     }
 
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
+    }
 
 }
