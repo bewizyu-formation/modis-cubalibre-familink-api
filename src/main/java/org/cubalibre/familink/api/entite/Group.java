@@ -40,6 +40,13 @@ public class Group {
 
     }
 
+    public Group(Integer id, User owner, String name, Date createDate) {
+        this.id = id;
+        this.owner = owner;
+        this.name = name;
+        this.createDate = createDate;
+    }
+
     public Integer getId() {
         return id;
     }

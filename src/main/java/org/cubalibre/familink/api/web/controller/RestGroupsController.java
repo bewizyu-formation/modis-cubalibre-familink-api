@@ -6,6 +6,7 @@ import org.cubalibre.familink.api.services.IContactService;
 import org.cubalibre.familink.api.services.IUserService;
 import org.cubalibre.familink.api.utils.Base64Utils;
 import org.cubalibre.familink.api.utils.TokenUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +31,7 @@ public class RestGroupsController {
     @ResponseBody
     public String getGroupsByUser(@RequestHeader(value = "Authorization") String token) {
         JSONObject jsonGroups = new JSONObject();
+        JSONArray jsonGroupArray = new JSONArray();
         JSONObject jsonGroup = new JSONObject();
 
         String decodedToken = null;
@@ -45,9 +47,17 @@ public class RestGroupsController {
         if (user != null) {
             List<Group> groups = contactServiceJpa.getGroupsByUser(user.getId());
             for (int i = 0; i < groups.size(); i++ ) {
-                jsonGroup.put("group", groups.get(i));
+                jsonGroup.put("id", groups.get(i).getId());
+
+                JSONObject jsonOwner = new JSONObject();
+                jsonOwner.put("id", groups.get(i).getOwner().getId());
+                jsonGroup.put("owner", jsonOwner);
+
+                jsonGroup.put("name", groups.get(i).getName());
+
+                jsonGroupArray.put(jsonGroup);
             }
-            jsonGroups.put("groups", jsonGroup);
+            jsonGroups.put("groups", jsonGroupArray);
         }
 
 
