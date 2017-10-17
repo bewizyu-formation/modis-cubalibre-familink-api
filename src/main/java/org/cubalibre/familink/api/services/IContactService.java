@@ -1,6 +1,7 @@
 package org.cubalibre.familink.api.services;
 
 import org.cubalibre.familink.api.entite.Contact;
+import org.cubalibre.familink.api.entite.Group;
 
 import java.util.List;
 
@@ -41,4 +42,18 @@ public interface IContactService {
      */
     void delete (int id);
 
+
+    /**
+     * Lister toutes les groups d'un Contact
+     *
+     * @param contactId contact Id
+     */
+    List<Group> getGroupsByContact(int contactId);
+
+    /**
+     * Lister toutes les groups d'un Contact using User
+     *
+     * @param userId user Id
+     */
+    List<Group> getGroupsByUser(int userId);
 }

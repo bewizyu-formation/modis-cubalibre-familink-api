@@ -1,6 +1,10 @@
 package org.cubalibre.familink.api.entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contact")
@@ -34,6 +38,10 @@ public class Contact {
 
     @Column(name = "gravatar")
     private String gravatar;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="contacts", fetch = FetchType.EAGER)
+    private List<Group> groups = new ArrayList<>();
 
     /**
      * Contructor vide
@@ -135,6 +143,14 @@ public class Contact {
 
     public void setGravatar(String gravatar) {
         this.gravatar = gravatar;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
     }
 
 }
