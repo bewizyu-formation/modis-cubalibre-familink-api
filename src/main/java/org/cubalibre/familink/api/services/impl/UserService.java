@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
 @Service(value = "userService")
 public class UserService implements IUserService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class.getName());
-	
+
 	@Autowired
 	private UserRepository userRepository;
     @Autowired
@@ -27,7 +26,6 @@ public class UserService implements IUserService {
 
 	@Override
 	public User create(User newUser) {
-        LOG.info(String.valueOf(newUser.getContact().getId()));
         Contact contactId = contactService.getContactById(newUser.getContact().getId());
         newUser.setContact(contactId);
         return userRepository.save(newUser);
@@ -37,5 +35,10 @@ public class UserService implements IUserService {
     public User getUserById(int id) {
 
         return userRepository.findOne(id);
+    }
+
+    @Override
+    public User getUserByMailAndPassword(String mail, String password) {
+        return userRepository.findByMailAndPassword(mail, password);
     }
 }
