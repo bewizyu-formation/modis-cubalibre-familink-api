@@ -1,15 +1,10 @@
 package org.cubalibre.familink.api.entite;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "profil")
 public class Profil {
-
-    private static final Logger LOG = LoggerFactory.getLogger(Profil.class.getName());
 
     @Id
     @Column(name = "id_profil")

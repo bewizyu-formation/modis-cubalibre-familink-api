@@ -42,10 +42,6 @@ public class JpaConfig {
         factory.setPackagesToScan("org.cubalibre.familink.api.entite");
         factory.setDataSource(dataSource);
 
-//		Properties jpaProperties = new Properties();
-//		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create");
-//		factory.setJpaProperties(jpaProperties);
-
         factory.afterPropertiesSet();
         return factory.getObject();
     }

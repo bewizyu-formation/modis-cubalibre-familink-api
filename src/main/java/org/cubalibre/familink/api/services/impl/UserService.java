@@ -4,8 +4,6 @@ import org.cubalibre.familink.api.entite.Contact;
 import org.cubalibre.familink.api.entite.User;
 import org.cubalibre.familink.api.repository.UserRepository;
 import org.cubalibre.familink.api.services.IUserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 @Service(value = "userService")
 public class UserService implements IUserService {
-
 
 	@Autowired
 	private UserRepository userRepository;
