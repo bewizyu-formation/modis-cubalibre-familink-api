@@ -25,4 +25,6 @@ public interface IUserService {
      * @return
      */
     User getUserById(int id);
+
+    User getUserByMailAndPassword(String mail, String password);
 }
