@@ -3,8 +3,6 @@ package org.cubalibre.familink.api.services.impl;
 import org.cubalibre.familink.api.entite.Group;
 import org.cubalibre.familink.api.repository.GroupRepository;
 import org.cubalibre.familink.api.services.IGroupService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service(value = "groupService")
 public class GroupService implements IGroupService {
-
-	private static final Logger LOG = LoggerFactory.getLogger(GroupService.class.getName());
 
 	@Autowired
 	private GroupRepository groupRepository;

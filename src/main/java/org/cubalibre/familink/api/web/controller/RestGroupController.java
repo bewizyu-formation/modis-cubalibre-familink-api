@@ -38,6 +38,7 @@ public class RestGroupController {
         User user = userService.getUserById(Integer.parseInt(userId));
         if (user != null) {
             group.setOwner(user);
+            group.addContact(user.getContact());
             return groupService.create(group);
         } else {
             throw new IllegalArgumentException("User doesn't exist !!");
