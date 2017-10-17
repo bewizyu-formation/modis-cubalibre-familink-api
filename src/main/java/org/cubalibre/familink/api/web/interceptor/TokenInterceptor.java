@@ -21,7 +21,9 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         String requestUri = request.getRequestURI();
 
         String[] parts = requestUri.split("/");
-
+        if (request.getMethod().equals("OPTIONS")) {
+            return true;
+        }
         if (request.getMethod().equals(RequestMethod.POST.toString()) && (parts[parts.length - 1].equals("user") || parts[parts.length - 1].equals("contact"))) {
             isAuthorised = true;
         } else {
