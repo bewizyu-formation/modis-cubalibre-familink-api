@@ -57,7 +57,7 @@ public class ContactServiceJpa implements IContactService {
     public List<Group> getGroupsByUser(int userId) {
         Query queryWithUser = em.createNativeQuery("SELECT groupe.* FROM groupe\n" +
                 "  INNER JOIN group_contact ON groupe.id_group = group_contact.group_id\n" +
-                "  INNER JOIN user on group_contact.contact_id = user.contact_id where user.id_user = ?)").setParameter(1, userId);
+                "  INNER JOIN user on group_contact.contact_id = user.contact_id where user.id_user = ?").setParameter(1, userId);
 
         List<Group> groups = getGroups(queryWithUser);
 
