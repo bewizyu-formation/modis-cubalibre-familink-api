@@ -48,18 +48,26 @@ public class ContactServiceJpa implements IContactService {
         Query query = em.createNativeQuery("SELECT groupe.* FROM groupe JOIN group_contact gc ON groupe.id_group = gc.group_id WHERE contact_id = ?");
         query.setParameter(1, contactId);
 
-        return query.getResultList();
+        List<Group> groups = getGroups(query);
+
+        return groups;
     }
 
     @Override
     public List<Group> getGroupsByUser(int userId) {
-        List<Group> groups = new ArrayList<>();
-
         Query queryWithUser = em.createNativeQuery("SELECT groupe.* FROM groupe\n" +
                 "  INNER JOIN group_contact ON groupe.id_group = group_contact.group_id\n" +
                 "  INNER JOIN user on group_contact.contact_id = user.contact_id where user.id_user = ?").setParameter(1, userId);
 
-        List<Object> objs = (List<Object>) queryWithUser.getResultList();
+        List<Group> groups = getGroups(queryWithUser);
+
+        return groups;
+    }
+
+
+    private List<Group> getGroups(Query query) {
+        List<Group> groups = new ArrayList<>();
+        List<Object> objs = (List<Object>) query.getResultList();
         for (Object obj : objs) {
             Object[] o = (Object[]) obj;
             String groupId =  String.valueOf(o[0]);
@@ -72,7 +80,6 @@ public class ContactServiceJpa implements IContactService {
             Group group = new Group(Integer.parseInt(groupId), owner, name, null);
             groups.add(group);
         }
-
         return groups;
     }
 

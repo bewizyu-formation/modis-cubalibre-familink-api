@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class RestGroupsController {
     @Qualifier("contactServiceJpa")
     private IContactService contactServiceJpa;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET, consumes = "application/json;charset=UTF-8")
+    @RequestMapping(path = "/", method = RequestMethod.GET, consumes = "application/json;charset=UTF-8", produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getGroupsByUser(@RequestHeader(value = "Authorization") String token) {
         JSONObject jsonGroups = new JSONObject();
