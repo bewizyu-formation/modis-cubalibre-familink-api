@@ -29,6 +29,15 @@ public class Profil {
      * Constructor
      *
      * @param id
+     */
+    public Profil(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Constructor
+     *
+     * @param id
      * @param type
      * @param color
      */

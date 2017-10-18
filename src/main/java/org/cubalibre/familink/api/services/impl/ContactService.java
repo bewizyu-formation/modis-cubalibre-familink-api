@@ -58,7 +58,7 @@ public class ContactService implements IContactService {
     }
 
     @Override
-    public List<Group> getGroupsByContact(int contactId) {
+    public List<Contact> getContactsByGroup(int groupId) {
         return null;
     }
 

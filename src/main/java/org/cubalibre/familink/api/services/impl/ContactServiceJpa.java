@@ -2,6 +2,7 @@ package org.cubalibre.familink.api.services.impl;
 
 import org.cubalibre.familink.api.entite.Contact;
 import org.cubalibre.familink.api.entite.Group;
+import org.cubalibre.familink.api.entite.Profil;
 import org.cubalibre.familink.api.entite.User;
 import org.cubalibre.familink.api.services.IContactService;
 import org.springframework.stereotype.Service;
@@ -44,20 +45,19 @@ public class ContactServiceJpa implements IContactService {
     }
 
     @Override
-    public List<Group> getGroupsByContact(int contactId) {
-        Query query = em.createNativeQuery("SELECT groupe.* FROM groupe JOIN group_contact gc ON groupe.id_group = gc.group_id WHERE contact_id = ?");
-        query.setParameter(1, contactId);
+    public List<Contact> getContactsByGroup(int groupId) {
+        Query query = em.createNativeQuery("SELECT c.* from CONTACT c WHERE c.id_contact IN (SELECT contact_id FROM group_contact WHERE group_id = ?)").setParameter(1, groupId);
 
-        List<Group> groups = getGroups(query);
+        List<Contact> contacts = getContacts(query);
 
-        return groups;
+        return contacts;
     }
 
     @Override
     public List<Group> getGroupsByUser(int userId) {
         Query queryWithUser = em.createNativeQuery("SELECT groupe.* FROM groupe\n" +
                 "  INNER JOIN group_contact ON groupe.id_group = group_contact.group_id\n" +
-                "  INNER JOIN user on group_contact.contact_id = user.contact_id where user.id_user = ?").setParameter(1, userId);
+                "  INNER JOIN user on group_contact.contact_id = user.contact_id where user.id_user = ?)").setParameter(1, userId);
 
         List<Group> groups = getGroups(queryWithUser);
 
@@ -81,6 +81,31 @@ public class ContactServiceJpa implements IContactService {
             groups.add(group);
         }
         return groups;
+    }
+
+    private List<Contact> getContacts(Query query) {
+        List<Contact> contacts = new ArrayList<>();
+        List<Object> objs = (List<Object>) query.getResultList();
+
+        for (Object obj : objs) {
+            Object[] o = (Object[]) obj;
+            String contactId =  String.valueOf(o[0]);
+            String lastname =  String.valueOf(o[1]);
+            String firstname =  String.valueOf(o[2]);
+            String phone =  String.valueOf(o[3]);
+
+            String profilId =  String.valueOf(o[4]);
+            Profil profil = new Profil(Integer.parseInt(profilId));
+
+            String address =  String.valueOf(o[5]);
+            String zipcode =  String.valueOf(o[6]);
+            String city =  String.valueOf(o[7]);
+            String gravatar =  String.valueOf(o[8]);
+
+            Contact contact = new Contact(Integer.parseInt(contactId), lastname, firstname, phone, profil, address, zipcode, city, gravatar);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 
 }

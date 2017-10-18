@@ -44,11 +44,11 @@ public interface IContactService {
 
 
     /**
-     * Lister toutes les groups d'un Contact
+     * Lister toutes les Contacts d'un USer
      *
-     * @param contactId contact Id
+     * @param groupId group Id
      */
-    List<Group> getGroupsByContact(int contactId);
+    List<Contact> getContactsByGroup(int groupId);
 
     /**
      * Lister toutes les groups d'un Contact using User

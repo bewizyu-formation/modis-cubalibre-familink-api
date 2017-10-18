@@ -73,6 +73,30 @@ public class Contact {
     }
 
     /**
+     * Constructor
+     *
+     * @param lastName
+     * @param firstName
+     * @param phone
+     * @param profil
+     * @param address
+     * @param zipcode
+     * @param city
+     * @param gravatar
+     */
+    public Contact(int id, String lastName, String firstName, String phone, Profil profil, String address, String zipcode, String city, String gravatar) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.phone = phone;
+        this.profil = profil;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.gravatar = gravatar;
+    }
+
+    /**
      * GETTERS & SETTERS
      *
      * @return
