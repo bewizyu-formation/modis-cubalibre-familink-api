@@ -1,11 +1,12 @@
 package org.cubalibre.familink.api.utils;
 
 public class TokenUtils {
-    private static final int nbrMinValidToken = 15;
+    private static final int nbrMinValidToken = 200;
 
     public static String generateToken(int userId) throws Exception {
         long newValidTimeStamp = (System.currentTimeMillis() + nbrMinValidToken * 60 * 1000);
         String token = userId + "-" + newValidTimeStamp;
+        System.out.println(Base64Utils.encode(token));
         return Base64Utils.encode(token);
     }
 
@@ -29,7 +30,7 @@ public class TokenUtils {
     }
 
     public static void main(String[] args) throws Exception {
-        int userId = 105;
+        int userId = 1;
         String generatedToken = TokenUtils.generateToken(userId);
         String token = "";
         try {

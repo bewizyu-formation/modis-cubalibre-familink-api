@@ -36,6 +36,8 @@ public class RestContactsController {
 
             JSONObject jsonProfil = new JSONObject();
             jsonProfil.put("id", contacts.get(i).getProfil().getId());
+            jsonProfil.put("type", contacts.get(i).getProfil().getType());
+            jsonProfil.put("color", contacts.get(i).getProfil().getColor());
             jsonContact.put("profil", jsonProfil);
 
             jsonContact.put("address", contacts.get(i).getAddress());
