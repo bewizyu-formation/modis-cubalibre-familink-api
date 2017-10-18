@@ -1,9 +1,9 @@
 package org.cubalibre.familink.api.entite;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "groupe")
@@ -25,11 +25,11 @@ public class Group {
     @Column(name = "create_date", nullable = true)
     private Date createDate = new Date();
 
-    @JoinTable(name = "group_contact", joinColumns = {@JoinColumn(name = "group_id", table = "groupe", referencedColumnName = "id_group",
-            foreignKey = @ForeignKey(name = "fk_group_contact_group_id"))},
-            inverseJoinColumns = @JoinColumn(name = "contact_id", table = "contact", referencedColumnName = "id_contact", foreignKey = @ForeignKey(name = "fk_group_contact_contact_id")))
-    @ManyToMany
-    private Set<Contact> contacts = new HashSet<>();
+    @ManyToMany(cascade= {CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "group_contact",
+            joinColumns = @JoinColumn (name = "group_id", referencedColumnName = "id_group"),
+            inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id_contact"))
+    private List<Contact> contacts = new ArrayList<>();
 
     /**
      * Constuctor vide
@@ -38,6 +38,13 @@ public class Group {
      */
     public Group() {
 
+    }
+
+    public Group(Integer id, User owner, String name, Date createDate) {
+        this.id = id;
+        this.owner = owner;
+        this.name = name;
+        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -68,7 +75,7 @@ public class Group {
         this.createDate = createDate;
     }
 
-    public Set<Contact> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 

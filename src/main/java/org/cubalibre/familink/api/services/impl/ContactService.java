@@ -1,6 +1,7 @@
 package org.cubalibre.familink.api.services.impl;
 
 import org.cubalibre.familink.api.entite.Contact;
+import org.cubalibre.familink.api.entite.Group;
 import org.cubalibre.familink.api.repository.ContactRepository;
 import org.cubalibre.familink.api.services.IContactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,16 @@ public class ContactService implements IContactService {
 
     @Override
     public void delete (int id) {
-
         contactRepository.delete(id);
     }
 
+    @Override
+    public List<Group> getGroupsByContact(int contactId) {
+        return null;
+    }
+
+    @Override
+    public List<Group> getGroupsByUser(int userId) {
+        return null;
+    }
 }

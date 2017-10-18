@@ -64,6 +64,10 @@ public class User {
         this.contact = contact;
     }
 
+    public User(int id) {
+        this.id = id;
+    }
+
     /**
      * Contructor vide
      */
